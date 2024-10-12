@@ -10,8 +10,8 @@
 	<div class="container">
 		<header>
 			<nav>
-				<div class="logo">
-					<h1>ProboLezat</h1>
+				<div class="logo" >
+					<h1 id="judul" onmouseover="ubahWarna()" onmouseout="warnaAsli()">ProboLezat</h1>
 				</div>
 				<input type="checkbox" id="click" />
 				<label for="click" class="menu-btn">
@@ -31,7 +31,11 @@
 					<h1>Mangga Khas Kota Probolinggo</h1>
 					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla commodi molestiae aliquam sit aperiam, distinctio odit consequatur sequi veniam ullam facilis tempora eos suscipit, atque harum ipsa quaerat alias eius.</p>
                     <p><h3>20k/Kg</h3></p>
-					<button type="button" class="btn_getStarted">Beli Sekarang</button>
+				<div id="snackbar" 
+						 style="border-radius: 10px;"
+						 onmouseover="sentuh()"
+						 onmouseout="lepas()">Silahkan Login Terlebih Dahulu!</div>
+					<button type="button" class="btn_getStarted" onclick="myFunction()">Beli Sekarang</button>
 				</div>
 				<div class="jumbotron-img">
 					<img style="border-radius: 32px;" src="asset/mangga.jpg" alt="" />
@@ -80,6 +84,7 @@
 			<h4>&copy;ProboLezat MFF15</h4>
 		</footer>
 	</div>
+	<script src="js/main.js"></script>
 </body>
 
 </html>
