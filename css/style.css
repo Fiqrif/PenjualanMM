@@ -2,7 +2,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-    background-color: #ffb72b;
+    /* background-color: #ffb72b; */
   }
   
   .container {
@@ -12,6 +12,7 @@
   
   body {
 	font-family: "Poppins", sans-serif;
+	background-color: #ffb72b;
   }
   
   /* new nav */
@@ -286,6 +287,10 @@
 	align-items: center;
 	margin: 40px 0;
   }
+
+  .footer {
+	background-color: #ffb72b !important;
+  }
   
   /* style page login */
   
@@ -328,9 +333,134 @@
 	color: white !important;
 	background-color: #eba416 !important;
   }
+
+  /*  Modal */
+.modal-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0; 
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center !important;
+    align-items: center !important;
+    color: #000;
+}
+
+.modal-dialog {
+	padding: 20px;
+    width: 80%; 
+    max-width: 500px;
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	justify-content: center;
+}
+
+.modal-content{
+	border-radius: 35px;
+	background-color: white;
+}
+
+.modal-header {
+	border-bottom: none;
+	padding: 10px 20px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: white;
+	border-radius: 85px;
+}
+
+.modal-title {
+	margin: 0;
+	font-size: 1.2rem;
+	color:#ffb72b; 
+	background-color: white;
+}
+
+.btn-close {
+	font-size: 1.5rem;
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: #000;
+}
+
+.modal-body {
+	padding: 20px;
+	background-color: white;
+}
+
+.form-group {
+	margin-bottom: 20px;
+	background-color: white;
+}
+
+.form-group  .labelmodal {
+	display: block;
+	margin-bottom: 5px;
+	background-color: white;
+}
+
+.form-group .inputdata,
+.form-group .inputalamat {
+	width: 100%;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: white;
+}
+
+.modal-footer {
+	border-top: none;
+	padding: 10px 20px;
+	display: flex;
+	justify-content: flex-end;
+	background-color: white;
+	border-radius: 85px;
+}
+
+.btn-secondary,
+.btn-yellow {
+	padding: 8px 16px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	color: #fff;
+	
+}
+
+.btn-secondary {
+	background-color: #888;
+	margin-right: 10px;
+}
+
+.btn-yellow {
+	background-color: #ffb72b;
+	color : white;
+}
+
+.btn-yellow:hover{
+	background-color: #eba416;
+}
+
+form{
+	background-color: white;
+}
+
+h4{
+	background-color: white;
+}
+
   
   /* responsive */
   @media screen and (max-width: 1023px) {
+	.modal-dialog {
+        width: 80%; 
+	}
 	.container {
 	  width: 100%;
 	  margin: 0 auto;
@@ -409,8 +539,5 @@
 	/* form-login responsive */
 	.form-login {
 	  width: 80%;
-	}
-	.modal-content {
-	  width: 80%; /* Sesuaikan ukuran modal untuk layar kecil */
 	}
   }
