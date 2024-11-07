@@ -1,3 +1,12 @@
+<?php 
+    session_start();
+    if(isset($_POST['logout'])){
+        session_unset();
+        session_destroy();
+        header('location: login.php');
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -163,6 +172,10 @@
 		<footer >
 			<h4 class="footer">&copy;ProboLezat MFF15</h4>
 		</footer>
+		<form action="index.php" method="POST" align="center" 	style="background-color: #ffb72b;">
+			<p><?= $_SESSION["username"] ?></p>
+			<button type="submit" name="logout" class="btn_logout">Logout</button>
+		</form>
 	</div>
 	<script src="js/main.js"></script>
 </body>
