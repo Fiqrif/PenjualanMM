@@ -1,3 +1,10 @@
+<?php
+session_start();
+if ($_SESSION['username'] == null) {
+	header('location:../admin/login-admin.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -37,7 +44,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="../admin/logout-admin.php">
 					<i class="bx bx-log-out"></i>
 					<span class="links_name">Log out</span>
 				</a>
@@ -63,22 +70,46 @@
 					<tr>
 						<th scope="col" style="width: 20%">Photo</th>
 						<th>Categories</th>
-						<th scope="col" style="width: 20%">Description</th>
+						<th scope="col" style="width: 30%">Description</th>
 						<th scope="col" style="width: 15%">Price</th>
-						<th scope="col" style="width: 30%">Action</th>
+						<th scope="col" style="width: 20%">Action</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td><img src="../asset/mangga.png" alt="" /></td>
-						<td>Mangga</td>
-						<td>Mangga adalah buah khas Probolinggo yang memiliki cita rasa manis. Warna buah yang kuning dan kulit buah yang berwarna hijau.</td>
-						<td>20.000/kg</td>
-						<td>
-							<button class="btn-edit" onclick="editCategory()">Edit</button>
-							<button class="btn-delete" onclick="deleteCategory()">Hapus</button>
-						</td>
-					</tr>
+					<?php
+					include '../connection/connection.php';
+					$sql = "SELECT * FROM tb_categories";
+					$result = mysqli_query($db, $sql);
+					if (mysqli_num_rows($result) == 0) {
+						echo "
+			   			<tr>
+							<td colspan='5' align='center'>
+                           		Data Kosong
+                        	</td>
+			   			</tr>
+						";
+					}
+					while ($data = mysqli_fetch_assoc($result)) {
+						echo "
+                    <tr>
+                      	<td>
+                        	<img src='../img_categories/$data[photo]' width='200px'>
+                      	</td>
+                      	<td>$data[categories]</td>
+					  	<td>$data[description]</td>
+                      	<td>$data[price]</td>
+                      	<td>
+                        	<a class='btn-edit' href=categories-edit.php?id=$data[id]>
+                               Edit
+                        	</a> | 
+                        	<a class='btn-delete' href=categories-hapus.php?id=$data[id]>
+                            	Hapus
+                        	</a>
+                      	</td>
+                    </tr>
+                  	";
+					}
+					?>
 				</tbody>
 			</table>
 		</div>
@@ -86,7 +117,7 @@
 	<script>
 		let sidebar = document.querySelector(".sidebar");
 		let sidebarBtn = document.querySelector(".sidebarBtn");
-		sidebarBtn.onclick = function () {
+		sidebarBtn.onclick = function() {
 			sidebar.classList.toggle("active");
 			if (sidebar.classList.contains("active")) {
 				sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");

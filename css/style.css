@@ -97,7 +97,23 @@
 	background-color: rgb(189, 189, 189);
 	color: #fff;
   }
-  
+
+  .btn_login4 {
+	background-color: rgb(226, 226, 226);
+	width: 100%;
+	padding: 8px 16px;
+	border-radius: 10px;
+	border: none;
+	cursor: pointer;
+	color: black;
+	margin-bottom: 10px;
+  }
+
+  .btn_login34:hover {
+	background-color: rgb(189, 189, 189);
+	color: #fff;
+  }
+
   /* style jumbotron */
   .jumbotron {
 	display: flex;
