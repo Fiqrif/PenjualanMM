@@ -42,25 +42,144 @@
 			</li>
 		</ul>
 	</div>
-	<section class="home-section">
-		<nav>
-			<div class="sidebar-button">
-				<i class="bx bx-menu sidebarBtn"></i>
+		<section class="home-section">
+			<nav>
+				<div class="sidebar-button">
+					<i class="bx bx-menu sidebarBtn"></i>
+				</div>
+				<div class="profile-details">
+					<span class="admin_name">ProboLezat Admin</span>
+				</div>
+			</nav>
+			<div class="home-content">
+				<h2 id="text">
+					<?php
+					session_start();
+					echo $_SESSION['username'];
+					?>
+				</h2>
+				<h3 id="date"></h3>
+
+				<div class="total-transaksi">
+					<br>
+					<?php
+					include 'connection/connection.php';
+					// Query untuk menghitung jumlah data
+					$count_query = "SELECT COUNT(*) AS total_transaksi FROM tb_transaction";
+					$count_result = mysqli_query($db, $count_query);
+
+					// Ambil hasilnya
+					$total_transaksi = 0;
+					if ($count_result && mysqli_num_rows($count_result) > 0) {
+						$count_data = mysqli_fetch_assoc($count_result);
+						$total_transaksi = $count_data['total_transaksi'];
+					}
+					?>
+					<h1>Total Transaksi : <?php echo $total_transaksi; ?></h1>
+				</div>
+
+				<div class="widget">
+					<table class="table-data">
+						<thead>
+						<tr>
+							<th>Tanggal</th>
+							<th>Nama</th>
+							<th>Kategori</th>
+							<th>Harga</th>
+						</tr>
+						</thead>
+						<tbody>
+						<?php
+						include 'connection/connection.php';
+						$sql = "SELECT * FROM tb_transaction";
+						$result = mysqli_query($db, $sql);
+						if (mysqli_num_rows($result) == 0) {
+							echo "
+							<h3 style='text-align: center; color: red;'>Data Kosong</h3>
+						";
+						} else {
+							while ($data = mysqli_fetch_assoc($result)) {
+								echo "
+								<tr>
+									<td>$data[tanggal]</td>
+									<td>$data[nama]</td>
+									<td>$data[jenis]</td>
+									<td>$data[harga]</td>
+								</tr>
+								";
+							}
+						}
+						?>
+						</tbody>
+					</table>
+
+					<button type="button" class="btn btn-tambah">
+						<a href="transaction/transaction.php">Transaction</a>
+					</button>
+				</div>
+
+				<div class="total-categories">
+					<br>
+					<?php
+					include 'connection/connection.php';
+					// Query untuk menghitung jumlah data
+					$count_query = "SELECT COUNT(*) AS total_kategori FROM tb_categories";
+					$count_result = mysqli_query($db, $count_query);
+
+					// Ambil hasilnya
+					$total_transaksi = 0;
+					if ($count_result && mysqli_num_rows($count_result) > 0) {
+						$count_data = mysqli_fetch_assoc($count_result);
+						$total_kategori = $count_data['total_kategori'];
+					}
+					?>
+					<h1>Total Kategori : <?php echo $total_kategori; ?></h1>
+				</div>
+
+				<div class="widget">
+				<table class="table-data">
+				<thead>
+					<tr>
+						<th scope="col" style="width: 20%">Photo</th>
+						<th>Categories</th>
+						<th scope="col" style="width: 30%">Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php
+					include 'connection/connection.php';
+					$sql = "SELECT * FROM tb_categories";
+					$result = mysqli_query($db, $sql);
+					if (mysqli_num_rows($result) == 0) {
+						echo "
+			   			<tr>
+							<td colspan='5' align='center'>
+                           		Data Kosong
+                        	</td>
+			   			</tr>
+						";
+					}
+					while ($data = mysqli_fetch_assoc($result)) {
+						echo "
+                    <tr>
+                      	<td>$data[categories]</td>
+					  	<td>$data[description]</td>
+                      	<td>$data[price]</td>
+                    </tr>
+                  	";
+					}
+					?>
+				</tbody>
+			</table>
+
+					<button type="button" class="btn btn-tambah">
+						<a href="categories/categories.php">Categories</a>
+					</button>
+				</div>
 			</div>
-			<div class="profile-details">
-				<span class="admin_name">ProboLezat Admin</span>
-			</div>
-		</nav>
-		<div class="home-content">
-			<h2 id="text">
-				<?php
-				session_start();
-				echo $_SESSION['username'];
-				?>
-			</h2>
-			<h3 id="date"></h3>
-		</div>
-	</section>
+		</section>
+
+
 	<script>
 		let sidebar = document.querySelector(".sidebar");
 		let sidebarBtn = document.querySelector(".sidebarBtn");
