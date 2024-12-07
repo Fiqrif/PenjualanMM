@@ -37,7 +37,7 @@
             </a>
          </li>
          <li>
-            <a href="#">
+            <a href="../logout.php">
                <i class="bx bx-log-out"></i>
                <span class="links_name">Log out</span>
             </a>
@@ -55,6 +55,9 @@
       </nav>
       <div class="home-content">
          <h3>Transaction</h3>
+         <button type="button" class="btn btn-tambah">
+				<a href="transaction-cetak.php">Cetak Laporan</a>
+			</button>
          <table class="table-data">
             <thead>
                <tr>
@@ -67,20 +70,32 @@
                </tr>
             </thead>
             <tbody>
-               <tr>
-                  <td>05-11-2024</td>
-                  <td>Jamil</td>
-                  <td>Mangga</td>
-                  <td>20.000/kg</td>
-                  <td>
-                     <p class="success">Success</p>
-                  </td>
-                  <td>
-                     <button class="btn_detail"
-                        onclick="showDetails('05-11-2023', 'Jamil', 'Mangga', '20.000/kg', 'Success')">Detail</button>
-                  </td>
-               </tr>
-               <!-- Add more rows as needed -->
+               <?php
+               include '../connection/connection.php';
+               $sql = "SELECT * FROM tb_transaction";
+               $result = mysqli_query($db, $sql);
+               if (mysqli_num_rows($result) == 0) {
+                  echo "
+                  <h3 style='text-align: center; color: red;'>Data Kosong</h3>
+               ";
+               } else {
+                  while ($data = mysqli_fetch_assoc($result)) {
+                     echo "
+                     <tr>
+                         <td>$data[tanggal]</td>
+                         <td>$data[nama]</td>
+                         <td>$data[jenis]</td>
+                         <td>$data[harga]</td>
+                         <td><p class='success'>$data[status]</p></td>
+                         <td style='display: none;'>$data[nomorhp]</td>
+                         <td>
+                         <button class='btn_detail' data-nomorhp='$data[nomorhp]' onclick='showDetails(\"$data[tanggal]\", \"$data[nama]\", \"$data[jenis]\", \"$data[harga]\", \"$data[status]\")'>Detail</button>
+                         </td>
+                     </tr>
+                     ";
+                  }
+               }
+               ?>
             </tbody>
          </table>
       </div>
@@ -88,16 +103,20 @@
    <script>
       let sidebar = document.querySelector(".sidebar");
       let sidebarBtn = document.querySelector(".sidebarBtn");
-      sidebarBtn.onclick = function () {
+      sidebarBtn.onclick = function() {
          sidebar.classList.toggle("active");
          if (sidebar.classList.contains("active")) {
             sidebarBtn.classList.replace("bx-menu", "bx-menu-alt-right");
          } else sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
       };
+
       function showDetails(tanggal, nama, kategori, harga, status) {
-         alert(`Tanggal: ${tanggal}\nNama: ${nama}\nKategori: ${kategori}\nHarga: ${harga}\nStatus: ${status}`);
+         let nomorhp = event.target.getAttribute('data-nomorhp');
+         alert(`Tanggal: ${tanggal}\nNama: ${nama}\nKategori: ${kategori}\nHarga: ${harga}\nNomor HP: ${nomorhp}\nStatus: ${status}`);
       }
    </script>
+
+
 </body>
 
 </html>
