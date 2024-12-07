@@ -192,4 +192,4 @@ function lepas(){
 //     document.getElementById("myModal2").style.display = "none";
 //     document.getElementById("myModal").style.display = "flex";
 // }
-
+//comment
